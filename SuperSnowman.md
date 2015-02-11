@@ -2683,7 +2683,7 @@ class Game:
 	def __init__(self):
 		print('new game...')
 		req = new(XMLHttpRequest())
-		req.open('GET', 'game.json', false)  ## false means sync
+		req.open('GET', 'mygame.json', false)  ## false means sync
 		req.send(null)
 		self.data = JSON.parse( req.responseText )
 

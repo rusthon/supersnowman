@@ -261,10 +261,13 @@ def on_redraw(reg):
 		'scale': ob.scale.to_tuple(),
 		'rotation': tuple(ob.rotation_euler)
 	}
-	urllib.request.urlopen(
-		'http://localhost:8080/blenderhack', 
-		data=urllib.parse.urlencode( {'message':json.dumps(msg)}).encode('utf-8')
-	)
+	try:
+		urllib.request.urlopen(
+			'http://localhost:8080/blenderhack', 
+			data=urllib.parse.urlencode( {'message':json.dumps(msg)}).encode('utf-8')
+		)
+	except urllib.error.URLError:
+		pass
 
 
 def attach_on_redraw_callback():
