@@ -6,3 +6,8 @@ Build and Run
 -------------
 `rusthon.py SuperSnowman.md --run=server.py --data=./data,./libs`
 
+Source Code
+-----------
+The source code is contained in a single large markdown file that contains:
+html, javascript, and python.
+https://github.com/rusthon/supersnowman/blob/master/SuperSnowman.md

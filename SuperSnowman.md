@@ -93,7 +93,7 @@ class MainHandler( tornado.web.RequestHandler ):
 			server.write('OK')
 
 		else:
-			local_path = path #os.path.join( PATHS['webroot'], path )
+			local_path = path
 			if os.path.isfile( local_path ):
 				data = open(local_path, 'rb').read()
 				self.set_header("Content-Length", len(data))
@@ -118,35 +118,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 		print( self.request.connection )
 
 	def on_message(self, msg):
-		if hasattr(self.ws_connection, 'previous_command') and self.ws_connection.previous_command and self.ws_connection.previous_command.get('binary', False):
-			if self.ws_connection.previous_command['command'] == 'upload':
-				path = os.path.join(
-					UploadDirectory, 
-					self.ws_connection.previous_command['file_name']
-				)
-				f = open( path, 'wb' )
-				f.write( msg )
-				f.close()
-
-			self.ws_connection.previous_command = None
-
-		else:
-			print('on json message', msg)
-
-			ob = json.loads( msg )
-			if isinstance(ob, dict):
-				if 'command' in ob:
-					if ob['command'] == 'compile':
-						js = python_to_javascript( ob['code'] )
-						self.write_message( {'eval':js})
-					elif ob['command'] == 'upload':
-						print('ready for upload...')
-						print( ob['file_name'] )
-
-					self.ws_connection.previous_command = ob
-
-			else:
-				self.write_message('"hello client"')
+		print('on json message', msg)
+		self.write_message('"hello client"')
 
 	def on_close(self):
 		print('websocket closed')
@@ -799,45 +772,7 @@ function create_enemy_material() {
 }
 
 
-
-</script>
-
-<@SuperSnowmanCode>
-
-</head>
-<body onload="javascript:main()">
-
-<div class="well span" id="three_container"></div>
-
-<p>
-<div class="navbar">
-	<button class="btn btn-warning" onclick="javascript:demo.setState(Demo.DEFAULT)">move</button>
-	<button class="btn" onclick="javascript:demo.setState(Demo.DRAWPOLYGON)">draw shape</button>
-	<button class="btn" onclick="javascript:toggle_camera()">camera</button>
-	<button class="btn" onclick="javascript:open_blender()">blender</button>
-	<input type="checkbox" checked="true" onclick="javascript:toggle_pixi(this.checked)">2D View</input>
-	<input type="checkbox" onclick="javascript:SPAWN_ENEMIES=this.checked">spawn enemies</input>
-
-</div>
-<p/>
-
-<div class="well span" id="demo_container"></div>
-
-</body>
-</html>
-```
-
-Source Code
------------
-The Python code below is translated to JavaScript and inserted above at the `<@SuperSnowmanCode>` special marker.
-
-@SuperSnowmanCode
-```rusthon
-#backend:javascript
-
-
-
-LAMBERT_NOISE_VSHADER = [
+var LAMBERT_NOISE_VSHADER = [
 	'varying vec3 vUv;',
 	'uniform float scale;',
 
@@ -881,12 +816,12 @@ LAMBERT_NOISE_VSHADER = [
 		THREE.ShaderChunk[ "shadowmap_vertex" ],
 
 		'vUv = position*scale;',
-		#'vUv.y *= 0.1;'
+		//'vUv.y *= 0.1;'
 	"}"
 
-].join("\n")
+].join("\n");
 
-LAMBERT_NOISE_FSHADER = [
+var LAMBERT_NOISE_FSHADER = [
 	document.getElementById( 'noise2D_lib_fragmentshader' ).textContent,
 
 	"uniform float opacity;",
@@ -944,7 +879,45 @@ LAMBERT_NOISE_FSHADER = [
 
 	"}"
 
-].join("\n")
+].join("\n");
+
+</script>
+
+<@SuperSnowmanCode>
+
+</head>
+<body onload="javascript:main()">
+
+<div class="well span" id="three_container"></div>
+
+<p>
+<div class="navbar">
+	<button class="btn btn-warning" onclick="javascript:demo.setState(Demo.DEFAULT)">move</button>
+	<button class="btn" onclick="javascript:demo.setState(Demo.DRAWPOLYGON)">draw shape</button>
+	<button class="btn" onclick="javascript:toggle_camera()">camera</button>
+	<button class="btn" onclick="javascript:open_blender()">blender</button>
+	<input type="checkbox" checked="true" onclick="javascript:toggle_pixi(this.checked)">2D View</input>
+	<input type="checkbox" onclick="javascript:SPAWN_ENEMIES=this.checked">spawn enemies</input>
+
+</div>
+<p/>
+
+<div class="well span" id="demo_container"></div>
+
+</body>
+</html>
+```
+
+Source Code
+-----------
+The Python code below is translated to JavaScript and inserted above at the `<@SuperSnowmanCode>` special marker.
+
+@SuperSnowmanCode
+```rusthon
+#backend:javascript
+
+
+
 
 with javascript:
 	def create_ice_material():
@@ -2715,7 +2688,7 @@ class Game:
 		self.data = JSON.parse( req.responseText )
 
 		init( self )
-		self.ws = init_websocket( self.on_ws_open, self.on_ws_message )
+		self.ws = init_websocket( self.on_ws_open.bind(this), self.on_ws_message.bind(this) )
 		self.load_game( self.data )
 
 	def load_game(self, game):
