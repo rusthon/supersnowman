@@ -162,6 +162,7 @@ Handlers = [
 if __name__ == '__main__':
 	print('running server...')
 	print('http://localhost:8080')
+	os.system('google-chrome --app=http://localhost:8080 &')
 	app = tornado.web.Application(Handlers)
 	app.listen( 8080 )
 	tornado.ioloop.IOLoop.instance().start()
@@ -1294,11 +1295,11 @@ ballSize = 20
 ballPosition.set(0,-20,5)
 
 Splashes = [
-	Sound('splash-drop.wav'),
-	Sound('splash-drift.wav'),
-	Sound('splash-tiny.wav'),
-	Sound('splash-thud.wav'),
-	Sound('splash-big.wav')
+	new Sound('splash-drop.wav'),
+	new Sound('splash-drift.wav'),
+	new Sound('splash-tiny.wav'),
+	new Sound('splash-thud.wav'),
+	new Sound('splash-big.wav')
 ]
 
 class Player:
@@ -1319,12 +1320,12 @@ class Player:
 		self.right_foot = 0.0
 
 		self.sounds = {
-			'jump'  : Sound('catlike.mp3'),
-			'shoot' : Sound('hit-machine.mp3'),
-			'missle-hit' : Sound('reverse-blip.mp3'),
-			'missle-hit-enemy' : Sound('hit-club.mp3'),
-			'bounce' : Sound('aping.mp3'),
-			'damage' : Sound('aping.mp3'),
+			'jump'  :       new Sound('catlike.mp3'),
+			'shoot' :       new Sound('hit-machine.mp3'),
+			'bounce' :      new Sound('aping.mp3'),
+			'damage' :      new Sound('aping.mp3'),
+			'missle-hit' :  new Sound('reverse-blip.mp3'),
+			'missle-hit-enemy' : new Sound('hit-club.mp3'),
 		}
 		self.root = new(THREE.Object3D())
 		self.root.position.set(x,y,0.5)
@@ -1625,7 +1626,7 @@ class Player:
 		#	print('grab on')
 		#	self.grab = true
 
-		if key in self.ALT_MOVE_KEYS:
+		if key in Player.ALT_MOVE_KEYS:  ## self.ALT_MOVE_KEYS is broken
 			pass
 
 		elif key == 37:
@@ -1677,7 +1678,7 @@ class Player:
 			mass = 0.00001,
 			velocity = vel
 		))
-		missle.on_missle_contact = self.on_missle_contact
+		missle.on_missle_contact = self.on_missle_contact.bind(this)
 		missle.addShape( shape )
 		missle.shape = shape
 		world.addBody( missle )
@@ -2212,7 +2213,7 @@ def init( game ):
 	init_threejs( game )
 
 	x,y,z = game.data.player.position
-	player = Player(x,y,z)
+	player = new Player(x,y,z)
 
 	planeShape = new( p2.Plane() )
 	planeShape.material = PhysicsMaterials['water']
