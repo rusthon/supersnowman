@@ -11,3 +11,12 @@ Source Code
 The source code is contained in a single large markdown file that contains:
 html, javascript, and python.
 https://github.com/rusthon/supersnowman/blob/master/SuperSnowman.md
+
+Blender Exporter
+----------------
+save your blender file into `./data` as `mygame.blend`,
+the exporter is hard coded to save `mygame.json` that the Tornado server uses.
+```bash
+cd data
+blender --python=snowman_exporter.py
+```
