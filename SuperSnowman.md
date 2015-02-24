@@ -2130,12 +2130,13 @@ def create_gpu_water(renderer, camera, scene, light):
 	)
 	waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping
 
+	## texture size must be square for custom shader to work ##
 	water = new(THREE.Water(
 		renderer, 
 		camera, 
 		scene, 
 		textureWidth=512, 
-		textureHeight=128,
+		textureHeight=512,
 		waterNormals=waterNormals,
 		alpha=0.9,
 		sunDirection=light.position.clone().normalize(),
@@ -2147,8 +2148,7 @@ def create_gpu_water(renderer, camera, scene, light):
 	water.set_custom_shader( waterMesh.material )
 	waterMesh.add( water )
 
-
-	WaterHF = gpuXWater
+	WaterHF = gpuXWater  ## TODO test other gpu water types, collision objects, etc.
 	#WaterHF.reset()
 	#WaterHF.setShouldDisplayWaterTexture(true)
 	return waterMesh
