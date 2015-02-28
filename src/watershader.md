@@ -66,7 +66,7 @@ def func():
 	))
 SKUNAMI.GpuHeightFieldWater.prototype.__setupVtf = func
 
-WaterHF = None
+
 def create_gpu_water(renderer, camera, scene, light):
 	global WaterHF, waterMesh, water
 
