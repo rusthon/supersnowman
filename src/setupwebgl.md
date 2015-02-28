@@ -127,7 +127,6 @@ def setup_rendertarget(renderer, scene, camera, light):
 	#scene.add( water_mesh )
 
 	create_snowflakes( scene )
-	init_godrays()
 	generate_glaicers()
 
 ```
