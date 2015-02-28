@@ -6,11 +6,6 @@ Build and Run
 -------------
 `rusthon.py SuperSnowman.md --run=server.py --data=./data,./libs`
 
-Source Code
------------
-The source code is contained in a single large markdown file that contains:
-html, javascript, and python.
-https://github.com/rusthon/supersnowman/blob/master/SuperSnowman.md
 
 Blender Exporter
 ----------------
@@ -20,3 +15,24 @@ the exporter is hard coded to save `mygame.json` that the Tornado server uses.
 cd data
 blender --python=snowman_exporter.py
 ```
+
+Source Code
+-----------
+The source code is in several markdown modules, the toplevel markdown that imports them is:
+[SuperSnowman.md](https://github.com/rusthon/supersnowman/blob/master/SuperSnowman.md)
+
+Modules
+-------
+* [blenderhack.md](src/blenderhack.md)
+* [server.md](src/server.md)
+* [mainhtml.md](src/mainhtml.md)
+* [iceshader.md](src/iceshader.md)
+* [watershader.md](src/watershader.md)
+* [hmapshader.md](src/hmapshader.md)
+* [sound.md](src/sound.md)
+* [enemy.md](src/enemy.md)
+* [player.md](src/player.md)
+* [helperfuncs.md](src/helperfuncs.md)
+* [setupwebgl.md](src/setupwebgl.md)
+* [gameengine.md](src/gameengine.md)
+
