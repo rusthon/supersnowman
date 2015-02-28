@@ -744,6 +744,7 @@ var LAMBERT_NOISE_FSHADER = [
 <body onload="javascript:main()">
 
 <div class="well span" id="three_container"></div>
+<div class="well" id="demo_container"></div>
 
 <p>
 <div class="navbar">
@@ -757,7 +758,6 @@ var LAMBERT_NOISE_FSHADER = [
 </div>
 <p/>
 
-<div class="well span" id="demo_container"></div>
 
 </body>
 </html>

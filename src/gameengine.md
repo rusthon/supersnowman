@@ -199,16 +199,12 @@ class Game:
 			camera.position.x += d
 
 
-		#if camera.position.y < 0:
-		#	renderer.setClearColor( 0x0000ff, 1 )
-		#	skyBox.visible = False
-		#	renderer.clear()
-		#	render_godrays( true )
-		#else:
-		renderer.setClearColor( 0xffffff, 1 )
-		skyBox.visible = True
+		if camera.position.y < 10:
+			camera.position.y += 0.1
 
+		renderer.setClearColor( 0xffffff, 1 )
 		renderer.clear()
+
 		WaterHF.update(delta)
 		water.render()
 

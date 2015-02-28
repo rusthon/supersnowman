@@ -28,11 +28,11 @@ Main globals for screen size, water size, etc..
 ```rusthon
 #backend:javascript
 
-SCREEN_WIDTH = 700
+SCREEN_WIDTH = 760
 SCREEN_HEIGHT = 500
 
-WATER_SIZE = [100,25];
-WATER_RES = [256,32];
+WATER_SIZE = [100,100];
+WATER_RES = [256,256];
 #WATER_GRID_SIZE = WATER_SIZE / WATER_RES;
 MEAN_WATER_HEIGHT = 0.0;
 WATER_FLOOD_RATE = 0.0;
@@ -175,7 +175,7 @@ def init( game ):
 	world.addContactMaterial( cm )
 
 
-	demo = new(PixiDemo(world, width=1200,height=540, run=false))
+	demo = new(PixiDemo(world, width=320,height=440, lineWidth=2.0, scrollFactor=0.01, pixelsPerLengthUnit=32, run=false))
 	demo.setState(Demo.DRAWPOLYGON)
 
 	def on_add_body(evt):

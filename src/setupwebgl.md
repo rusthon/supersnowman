@@ -111,12 +111,14 @@ def setup_rendertarget(renderer, scene, camera, light):
 
 	composer = new(THREE.EffectComposer( renderer, renderTarget ))
 	renderModel = new(THREE.RenderPass( scene, camera ))
-	vblur.renderToScreen = true;
 
+	effectFXAA.renderToScreen = true;
 	composer.addPass( renderModel );
 	composer.addPass( effectFXAA );
-	composer.addPass( hblur );
-	composer.addPass( vblur );
+
+	#vblur.renderToScreen = true;
+	#composer.addPass( hblur );
+	#composer.addPass( vblur );
 
 	skybox = create_skybox( scene )
 	#rscene.add( skybox )
