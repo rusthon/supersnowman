@@ -335,26 +335,14 @@ void main( void ) {
 
 <script type="text/javascript">
 
-var SnowFlakes = [];
-var sprite1 = THREE.ImageUtils.loadTexture( "snowflake1.png" );
-var sprite2 = THREE.ImageUtils.loadTexture( "snowflake2.png" );
-var sprite3 = THREE.ImageUtils.loadTexture( "snowflake3.png" );
-var sprite4 = THREE.ImageUtils.loadTexture( "snowflake4.png" );
-var sprite5 = THREE.ImageUtils.loadTexture( "snowflake5.png" );
-
-var snowball_sprite = THREE.ImageUtils.loadTexture( "snowball.png" );
-
 function create_snowflakes( scene ) {
 	geometry = new THREE.Geometry();
 
-
 	for ( i = 0; i < 3000; i ++ ) {
-
 		var vertex = new THREE.Vector3();
 		vertex.x = Math.random() * 2000 - 1000;
 		vertex.y = Math.random() * 2000 - 1000;
 		vertex.z = Math.random() * 2000 - 1000;
-
 		geometry.vertices.push( vertex );
 
 	}
@@ -368,25 +356,18 @@ function create_snowflakes( scene ) {
 
 	var materials = [];
 	for ( i = 0; i < parameters.length; i ++ ) {
-
 		color  = parameters[i][0];
 		sprite = parameters[i][1];
 		size   = parameters[i][2];
-
 		materials[i] = new THREE.ParticleSystemMaterial( { size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: false, transparent : true } );
 		materials[i].color.setHSL( color[0], color[1], color[2] );
-
 		particles = new THREE.ParticleSystem( geometry, materials[i] );
-
 		particles.rotation.x = Math.random() * 6;
 		particles.rotation.y = Math.random() * 6;
 		particles.rotation.z = Math.random() * 6;
-
 		scene.add( particles );
 		SnowFlakes.push( particles );
-
 	}
-
 }
 
 

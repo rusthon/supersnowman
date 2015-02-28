@@ -6,10 +6,6 @@ Player Class
 #backend:javascript
 
 
-pins = [0, cloth.w]
-ballSize = 20
-ballPosition.set(0,-20,5)
-
 Splashes = [
 	new Sound('splash-drop.wav'),
 	new Sound('splash-drift.wav'),
@@ -390,7 +386,7 @@ class Player:
 		shape.material = PhysicsMaterials['missle']
 		#x,y = self.center.position
 		missle = new(p2.Body(
-			position = [x,y+0.5],
+			position = [x,y+1.5],
 			mass = 0.00001,
 			velocity = vel
 		))
@@ -409,8 +405,10 @@ class Player:
 
 	def on_missle_contact(self, missle, body, shape):
 		if shape.material == PhysicsMaterials['player']:
+			print 'shot self'
 			return
 
+		print 'missle hit something'
 		self.sounds['missle-hit'].play()
 
 		missle.vertex.x = -1000
@@ -674,6 +672,7 @@ class Player:
 		for missle in self.projectiles:
 			missle.vertex.x = missle.position[0]
 			missle.vertex.y = missle.position[1]
+			print missle.vertex
 		self.particles.geometry.verticesNeedUpdate = true
 
 		if self.jump_pull == 0.0:

@@ -75,6 +75,22 @@ PhysicsMaterials = {
 	'exit' : new(p2.Material()),
 }
 
+## super snowman cloth cape ##
+## the cloth global is defined in supersnowman/libs/three.js/Cloth.js
+pins = [0, cloth.w]
+ballSize = 20
+ballPosition.set(0,-20,5)
+
+
+SnowFlakes = []
+sprite1 = THREE.ImageUtils.loadTexture( "snowflake1.png" )
+sprite2 = THREE.ImageUtils.loadTexture( "snowflake2.png" )
+sprite3 = THREE.ImageUtils.loadTexture( "snowflake3.png" )
+sprite4 = THREE.ImageUtils.loadTexture( "snowflake4.png" )
+sprite5 = THREE.ImageUtils.loadTexture( "snowflake5.png" )
+
+snowball_sprite = THREE.ImageUtils.loadTexture( "snowball.png" )
+
 ```
 
 Extra Markdown Imports

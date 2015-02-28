@@ -180,13 +180,13 @@ class Game:
 		if AUTO_CAMERA:
 			#if y > 0.0:
 
-			d = (y - camera.position.y) * 0.1
+			d = (y - camera.position.y) * 0.01
 			camera.position.y += d
 
 			#elif camera.position.y > 3:
 			#	camera.position.y *= 0.9
 
-			#camera.position.z = y+10
+			camera.position.z = y+10
 			#y += 40.0
 			d = (y - camera.target.y) * 0.1
 			camera.target.y += d
