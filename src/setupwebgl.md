@@ -124,6 +124,7 @@ def setup_rendertarget(renderer, scene, camera, light):
 	#rscene.add( skybox )
 
 	water_mesh = create_gpu_water( renderer, camera, scene, light )
+	water_mesh.position.y -= 1
 	#scene.add( water_mesh )
 
 	create_snowflakes( scene )

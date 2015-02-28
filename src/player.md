@@ -92,7 +92,7 @@ class Player:
 		geom = new(THREE.Geometry())
 		geom.vertices.append( new(THREE.Vector3()) )
 		self.glow_material = 	new(THREE.ParticleSystemMaterial(
-			size  = 20, 
+			size  = 15, 
 			color = 0xffff44,
 			map   = snowball_sprite,
 			depthTest = false,
@@ -139,13 +139,12 @@ class Player:
 		self.head.add( self.mouth )
 
 
-
 		self.missle_material = 	new(THREE.ParticleSystemMaterial(
-			size  = 5, 
+			size  = 10, 
 			color = 0xffff44,
 			map   = snowball_sprite,
 			depthTest = false,
-			transparent = true
+			#transparent = true
 		))
 
 
@@ -164,7 +163,7 @@ class Player:
 		y = self.spawn_point[1]-0.25
 		self.center = new(p2.Body(
 			position=[x,y], 
-			mass=100.0,
+			mass=50.0,
 			fixedRotation = true
 		))
 		self.center.player = self
@@ -616,7 +615,7 @@ class Player:
 		)
 
 		self.marching_cubes = blob = new(
-			THREE.MarchingCubes(16, blobMaterial, True, True )
+			THREE.MarchingCubes(24, blobMaterial, True, True )
 		)
 		blob.position.set( 0, 0, 1 )
 		blob.scale.set( 2.5, 2.5, 4 )
@@ -735,7 +734,7 @@ class Player:
 
 		if self.head_attached:
 			#self.head.position.x = ax
-			self.head.position.y = height*0.7
+			self.head.position.y = height*0.8
 		else:
 			self.head.position.x = self.head_body.position[0]
 			self.head.position.y = self.head_body.position[1]
@@ -825,6 +824,13 @@ class Player:
 			else:
 				blob.addBall(0.3, 0.6, z, strength*5, 0.001)
 				blob.addBall(0.2, 0.6, z, strength*3, 0.001)
+
+		else:
+			blob.addBall(0.25, (ay*0.01)+0.5, z+0.05, strength*3, 0.001)
+			blob.addBall(0.75, (ay*0.01)+0.5, z+0.05, strength*3, 0.001)
+			blob.addBall(0.35, 0.45, z-0.1, strength*3, 0.001)
+			blob.addBall(0.65, 0.45, z-0.1, strength*3, 0.001)
+
 
 		y = (bottom-ay) * 0.2
 		if self.moving == 'FORWARD' or self.moving == 'BACKWARDS':

@@ -8,7 +8,7 @@ Enemy Class
 enemy_kill_sound = Sound('hit-noise.mp3')
 Enemies = []
 class Enemy:
-	def __init__(self, x=-40, y=10, z=0, radius=1, segments=16, rings=8):
+	def __init__(self, x=-40, y=10, z=0, radius=2, segments=16, rings=8):
 		Enemies.append( self )
 
 		self.active = false
